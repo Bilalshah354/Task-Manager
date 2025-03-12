@@ -14,7 +14,7 @@ function App() {
   const authContext = useContext(AuthContext);
 
   if (!authContext) {
-    return <div>Loading...</div>; // Agar context available nahi toh temporary loading show karo
+    return <div>Loading...</div>;
   }
 
   const { user } = authContext;
@@ -27,7 +27,11 @@ function App() {
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       ) : (
-        <div className={`${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"} flex flex-col min-h-screen`}>
+        <div
+          className={`${
+            darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+          } flex flex-col min-h-screen`}
+        >
           <Navbar />
           <div className="flex flex-1">
             <Sidebar />

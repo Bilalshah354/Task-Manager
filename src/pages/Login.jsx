@@ -18,8 +18,10 @@ const Login = () => {
     <div className="flex h-screen items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 dark:from-gray-900 dark:to-gray-800">
       <div className="bg-white p-8 rounded-lg shadow-2xl w-96 border border-gray-200">
         <h2 className="text-3xl font-bold text-center text-gray-800">Login</h2>
-        <p className="text-center text-gray-500 text-sm">Welcome back! Please login to continue.</p>
-        
+        <p className="text-center text-gray-500 text-sm">
+          Welcome back! Please login to continue.
+        </p>
+
         <form onSubmit={handleLogin} className="mt-6">
           <div className="mb-4">
             <input
@@ -31,7 +33,7 @@ const Login = () => {
               required
             />
           </div>
-          
+
           <div className="mb-4">
             <input
               type="password"
@@ -42,7 +44,7 @@ const Login = () => {
               required
             />
           </div>
-          
+
           <button
             type="submit"
             className="w-full mt-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white p-3 rounded-lg font-semibold transition-all duration-300"
@@ -52,7 +54,10 @@ const Login = () => {
         </form>
 
         <p className="text-center text-sm text-gray-500 mt-4">
-          Don't have an account? <a href="#" className="text-blue-500 hover:underline">Sign up</a>
+          Don't have an account?{" "}
+          <a href="#" className="text-blue-500 hover:underline">
+            Sign up
+          </a>
         </p>
       </div>
     </div>

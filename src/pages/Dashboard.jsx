@@ -8,6 +8,7 @@ const Dashboard = () => {
   const projects = useSelector((state) => state.projects.projects);
   const [projectName, setProjectName] = useState("");
   const [editMode, setEditMode] = useState(null);
+  const [editProjectName, setEditProjectName] = useState("");
 
   const handleAddProject = () => {
     if (projectName.trim() !== "") {
@@ -18,13 +19,14 @@ const Dashboard = () => {
 
   const handleEditProject = (id, name) => {
     setEditMode(id);
-    setProjectName(name);
+    setEditProjectName(name);
   };
 
   const handleSaveEdit = (id) => {
-    dispatch(editProject({ id, name: projectName }));
-    setEditMode(null);
-    setProjectName("");
+    if (editProjectName.trim() !== "") {
+      dispatch(editProject({ id, name: editProjectName }));
+      setEditMode(null);
+    }
   };
 
   const handleKeyPress = (e) => {
@@ -37,7 +39,6 @@ const Dashboard = () => {
     <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-4 text-center">Project Dashboard</h1>
 
-      {/* Input Field and Button */}
       <div className="mb-4 flex flex-col md:flex-row gap-3">
         <input
           type="text"
@@ -47,27 +48,26 @@ const Dashboard = () => {
           onKeyDown={handleKeyPress}
           className="border p-3 text-lg flex-grow rounded-md"
         />
-        <button 
-          onClick={handleAddProject} 
+        <button
+          onClick={handleAddProject}
           className="bg-blue-500 text-white px-4 py-3 rounded-md hover:bg-blue-600 transition"
         >
           Add Project
         </button>
       </div>
 
-      {/* Project List */}
       <ul className="space-y-3">
         {projects.map((project) => (
-          <li 
-            key={project.id} 
+          <li
+            key={project.id}
             className="border p-3 flex flex-col md:flex-row justify-between items-center rounded-md shadow-md bg-white"
           >
             {editMode === project.id ? (
               <div className="flex w-full gap-2">
                 <input
                   type="text"
-                  value={projectName}
-                  onChange={(e) => setProjectName(e.target.value)}
+                  value={editProjectName}
+                  onChange={(e) => setEditProjectName(e.target.value)}
                   className="border p-2 text-lg flex-grow rounded-md"
                 />
                 <button
@@ -79,7 +79,10 @@ const Dashboard = () => {
               </div>
             ) : (
               <div className="w-full flex flex-col md:flex-row justify-between items-center">
-                <Link to={`/project/${project.id}`} className="text-gray-900 text-lg font-semibold truncate">
+                <Link
+                  to={`/project/${project.id}`}
+                  className="text-gray-900 text-lg font-semibold truncate"
+                >
                   {project.name}
                 </Link>
                 <div className="flex gap-2 mt-2 md:mt-0">
